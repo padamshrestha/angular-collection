@@ -1,0 +1,88 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Node Lite Server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/lite-server/bin/lite-server",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outFiles": []
+        },
+        {
+            "name": "Launch Chrome against localhost with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceRoot}",
+            "sourceMaps": true,
+            //"trace": "verbose",
+            // This will avoid collisions with other Chrome instances
+            // This forces Chrome to run a brand new instance, allowing existing chrome windows to stay open.
+            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            //OSX: "sourceMapPathOverrides": { "webpack:///./*": "${webRoot}/*" }
+            //Windows: "sourceMapPathOverrides": { "webpack:///C:*":"C:/*" }
+            //Linux: "sourceMapPathOverrides": { "webpack:///*": "/*" }            
+            "sourceMapPathOverrides": {
+                "webpack:///./*": "${webRoot}/*"
+            }
+        },
+        {
+            // Launch steps to debug:
+            // 1. launch the browser with the command /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=remote-profile
+            // 2. In the new window, access to http://localhost:4200
+            // 3. Run the debugger with this config in VSC
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "webRoot": "${workspaceRoot}",
+            "sourceMaps": true,
+            //"trace": "verbose",
+            //OSX: "sourceMapPathOverrides": { "webpack:///./*": "${webRoot}/*" }
+            //Windows: "sourceMapPathOverrides": { "webpack:///C:*":"C:/*" }
+            //Linux: "sourceMapPathOverrides": { "webpack:///*": "/*" }   
+            "sourceMapPathOverrides": {
+                "webpack:///./*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "Launch Firefox against localhost with sourcemaps",
+            "type": "firefox",
+            "request": "launch",
+            "firefoxExecutable": "/Applications/Internet/Firefox.app/Contents/MacOS/Firefox",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceRoot}",
+            //"trace": "verbose",
+            "profile": "default",
+            "pathMappings": [
+                {
+                    "url": "webpack:///",
+                    "path": "${webRoot}"
+                }
+            ],
+            "log": {
+                "consoleLevel": {
+                    "PathConversion": "Debug",
+                    "default": "Error"
+                }
+            }
+        }
+    }
+]
+}

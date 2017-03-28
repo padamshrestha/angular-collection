@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {DynaMetaUtils} from './dyna-meta.utils';
+import {Book} from './../book/model/book.model';
 import {DynaValidator} from './dyna.validator';
 
 
@@ -17,12 +17,11 @@ export class DynaFormBuilder {
     const formControls = {};
     const formFieldList: any = [];
     Object.keys(classInstance).forEach(key => {
-      formControls[key] = new FormControl(null, DynaValidator.validateControl);
+      formControls[key] = new FormControl(null, DynaValidator.validateControl(Book));
       formFieldList.push(key);
     });
 
     const formInstance = this.fb.group(formControls);
-    DynaMetaUtils.setMetaConstructor(classConstructor, formInstance);
     formInstance['formFields'] = formFieldList;
 
     return formInstance;

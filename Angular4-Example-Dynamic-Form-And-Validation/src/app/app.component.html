@@ -7,9 +7,9 @@
         <label for="{{field}}">{{field}}</label>
         <input type="text" id="{{field}}" formControlName="{{field}}" />
         <div *ngIf="!bookForm.controls[field].valid && (bookForm.controls[field].dirty || bookForm.controls[field].touched)" class="alert alert-danger">
-          <div *ngIf="bookForm.controls[field].hasError('customErr')" class="alert alert-danger">
+          <div *ngIf="bookForm.controls[field].hasError('dynaControlError')" class="alert alert-danger">
             <ul>
-              <li *ngFor="let error of bookForm.controls[field].errors['customErr'].messages">
+              <li *ngFor="let error of bookForm.controls[field].errors['dynaControlError'].messages">
                 {{error}}
               </li>
             </ul>
